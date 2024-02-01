@@ -1,0 +1,77 @@
+.main-container {
+  width: 100%;
+}
+
+.map-and-info-container {
+  width: 100%;
+  position: relative;
+}
+
+.info-container {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+}
+
+.building-image-container img {
+  filter: drop-shadow(4px 4px 5px white);
+}
+
+.building-image-container img:hover {
+  filter: drop-shadow(2px 2px 2px #55b76b);
+}
+
+.student_building {
+  position: absolute;
+  width: 9.5%;
+  top: 31.6%;
+  left: 32.9%;
+}
+
+.grace_building {
+  position: absolute;
+  width: 7.25%;
+  top: 4.4%;
+  left: 57.5%;
+}
+
+.triangle-icon {
+  margin-left: 15px;
+  font-size: 0.7em;
+  vertical-align: middle;
+}
+
+.time {
+  display: flex;
+  justify-content: center;
+  margin: 0;
+  font-size: 1.2em;
+  color: black;
+}
+
+.map-container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.option-and-info-flex-container {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row-reverse;
+  max-width: 1440px;
+  height: 750px;
+  padding: 30px 5vw;
+  margin: auto;
+}
+
+.info-container-dividier {
+  height: 20px;
+}
+
+@media screen and (max-width: 850px) {
+  .option-and-info-flex-container {
+    padding: 0px;
+    height: 500px;
+  }
+}

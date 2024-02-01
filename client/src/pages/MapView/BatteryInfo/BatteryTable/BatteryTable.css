@@ -1,0 +1,15 @@
+/*
+Table CSS
+*/
+
+.BatteryTable td {
+  padding: 1px;
+}
+
+.BatteryTable th {
+  padding: 1px;
+}
+
+.BatteryTable {
+  border-bottom: 0px;
+}

@@ -1,0 +1,27 @@
+.custom-dropdown select {
+  border: none;
+  width: 100%;
+  background-color: #fff;
+  color: black;
+}
+
+.custom-dropdown {
+  width: 130px;
+  padding: 8px;
+  font-size: 14px;
+  border-radius: 10px;
+  background-color: #fff;
+  border-color: transparent;
+  cursor: pointer;
+  color: black;
+}
+
+.custom-dropdown select:focus {
+  outline: none;
+}
+
+@media screen and (max-width: 900px) {
+  .custom-dropdown {
+    width: 100%;
+  }
+}

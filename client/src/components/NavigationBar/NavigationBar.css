@@ -1,0 +1,161 @@
+/* NavigationBar.css */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 60px 20px 60px;
+
+  /* navigationbar 높이 수정 필요 */
+  height: 60px;
+}
+
+.nav-links {
+  list-style-type: none;
+  display: flex;
+  padding: 0;
+  margin: 0;
+  text-align: center;
+}
+
+.nav-links li {
+  width: 120px;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: black;
+  font-size: 1.1em;
+}
+
+.nav-link:hover {
+  color: #d9d9d9;
+}
+
+.nav-link-active {
+  text-decoration: none;
+  color: #55b76b;
+  font-size: 18px;
+}
+
+.nav-links li button {
+  border: none;
+  background-color: white;
+  padding: 0;
+}
+
+.nav-links li button:hover {
+  cursor: pointer;
+}
+
+.nav-item {
+  position: relative;
+}
+
+.nav-dropdown {
+  display: none;
+  position: absolute;
+  top: 100%;
+  width: max-content;
+  left: -10px;
+  border: 1px solid #d9d9d9;
+  padding: 12px 10px;
+  box-shadow: #d9d9d9;
+  background-color: white;
+}
+
+.nav-item:hover .nav-dropdown {
+  display: flex;
+  flex-direction: column;
+}
+
+.nav-dropdown:hover {
+  display: flex;
+  flex-direction: column;
+}
+
+.nav-dropdown hr {
+  width: 60px;
+  background-color: #d3d3d3;
+  height: 1px;
+  border: none;
+}
+
+.logo {
+  padding-top: 25px;
+  width: max(30%, 200px);
+  height: 17%;
+}
+
+.hamburger {
+  display: none;
+}
+
+@media screen and (max-width: 600px) {
+  .nav-links {
+    font-size: 15px;
+  }
+
+  .hamburger {
+    display: block;
+  }
+}
+
+@media screen and (max-width: 720px) {
+  .logo {
+    width: 150px;
+    height: 50px;
+  }
+
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 10px 20px 20px;
+    height: 40px;
+  }
+
+  .hamburger {
+    display: block;
+    width: 3.5em;
+    margin-top: 1%;
+    margin-right: 3%;
+  }
+
+  .nav-links {
+    display: none;
+  }
+
+  .sidebar {
+    display: block;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .logo {
+    width: 150px;
+    height: 50px;
+  }
+
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 10px 20px 20px;
+    height: 40px;
+  }
+
+  svg {
+    display: block;
+    width: 3.5em;
+    margin-top: 1%;
+    margin-right: 3%;
+  }
+
+  .nav-links {
+    display: none;
+  }
+
+  .sidebar {
+    display: block;
+  }
+}
