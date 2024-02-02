@@ -7,7 +7,7 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 
-import "./ErrDataTable.css";
+import "./NIDataTable.css";
 
 const CustomTable = ({ data, columns }) => {
   const table = useReactTable({
@@ -24,7 +24,7 @@ const CustomTable = ({ data, columns }) => {
 
   return (
     <div className="CustomTable">
-      <table className="ErrDataTable">
+      <table className="NIDataTable">
         <thead>
           {table.getHeaderGroups().map((headerGroup) => (
             <tr key={headerGroup.id}>

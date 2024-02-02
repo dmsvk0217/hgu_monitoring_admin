@@ -1,29 +1,29 @@
 .download-button {
-    float: right;
-    border: none;
-    background-color: white;
-    color: rgba(85,183,107);
-    padding: 10px;
-    display: flex;
-    width: fit-content;
+  float: right;
+  border: none;
+  background-color: white;
+  color: rgba(85, 183, 107);
+  padding: 10px;
+  display: flex;
+  width: fit-content;
 }
 
-.download-button:hover{
-    cursor: pointer;
+.download-button:hover {
+  cursor: pointer;
 }
 
 .file {
-    margin-left: 10px;
-    width: 30px;
+  margin-left: 10px;
+  width: 30px;
 }
 
 @media screen and (max-width: 450px) {
-    .file {
-        margin-left: 0;
-        padding: none;
-    }   
+  .file {
+    margin-left: 0;
+    padding: none;
+  }
 
-    .download-button {
-        width: 150px;
-    }
+  .download-button {
+    width: 150px;
+  }
 }

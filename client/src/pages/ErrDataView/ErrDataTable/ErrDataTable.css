@@ -2,7 +2,7 @@
 Table CSS
 */
 
-table {
+.ErrDataTable {
   width: 100%;
   border-top: 1px solid lightgray;
   background-color: #fff;

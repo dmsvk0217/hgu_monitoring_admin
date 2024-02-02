@@ -1,0 +1,27 @@
+/*
+Table CSS
+*/
+
+.CustomTable {
+  width: 100%;
+}
+
+.NIDataTable {
+  width: 100%;
+  margin: auto;
+  border-top: 1px solid lightgray;
+  background-color: #fff;
+  font-size: 12px;
+  text-align: center;
+}
+
+@media screen and (max-width: 450px) {
+  th {
+    font-size: 0.7em;
+  }
+
+  th,
+  td {
+    padding: 3px 3px;
+  }
+}
