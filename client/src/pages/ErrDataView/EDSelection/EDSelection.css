@@ -1,0 +1,137 @@
+/* table container 
+css */
+
+.ED-table-select-container {
+  background-color: #ebf0eb;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  padding: 20px 10px 15px 10px;
+  border: 0;
+}
+
+.ED-table-title-container {
+  padding: 5px 0px;
+  display: flex;
+  align-items: center;
+}
+
+.ED-table-title {
+  font-weight: bold;
+  font-size: 1.1em;
+  align-items: center;
+  margin-right: 10px;
+}
+
+.location-and-unit {
+  display: flex;
+  width: 100%;
+  justify-content: space-evenly;
+}
+
+.ED-graph-location-dropdown {
+  position: relative;
+}
+
+.dropdown-title {
+  text-align: center;
+  align-items: center;
+  color: black;
+  font-size: 1.1em;
+  border: none;
+  font-size: 0.8em;
+  align-items: center;
+  display: flex;
+}
+
+.dropdown .dropbtn {
+  align-items: center;
+  color: black;
+  border: none;
+  cursor: pointer;
+  background-color: white;
+  border-radius: 7px;
+  width: 100px;
+  /* height: 25px; */
+  font-size: 0.8em;
+  align-items: center;
+  margin-left: 10px;
+}
+
+.dropdown-content {
+  font-size: 0.8em;
+}
+
+.time-dropdown {
+  display: flex;
+  width: 120px;
+  padding: 8px;
+  font-size: 14px;
+  border-radius: 10px;
+  background-color: #fff;
+  border-color: transparent;
+  cursor: pointer;
+  align-items: center;
+
+  justify-content: space-between;
+  /* 왜 100%로 하면 상위 div바깥으로 삐져나가는지 모르겠다. datePicker문제인가?! */
+  width: 97%;
+  margin: 0px 0px 5px 0px;
+}
+
+.ED-table-location,
+.ED-table-unit,
+.ED-table-time {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ED-table-time p {
+  width: 100px;
+}
+
+.react-datepicker__navigation--next {
+  left: 200px;
+}
+
+.react-datepicker__navigation--previous {
+  right: 50px;
+}
+
+.ED-table-select-container p {
+  font-weight: bold;
+  margin-right: 8px;
+}
+
+@media screen and (max-width: 900px) {
+  .ED-table-select-container {
+    flex-direction: column;
+    padding-top: 10px;
+  }
+  .location-and-unit {
+    flex-direction: column;
+    width: 100%;
+  }
+  .ED-table-location {
+    flex-direction: column;
+    align-items: start;
+    width: 100%;
+  }
+  .ED-table-unit {
+    flex-direction: column;
+    align-items: start;
+    width: 100%;
+  }
+  .ED-table-time {
+    flex-direction: column;
+    align-items: start;
+  }
+
+  .ED-table-select-container p {
+    margin-left: 0px;
+    margin-top: 10px;
+    margin-bottom: 5px;
+  }
+}

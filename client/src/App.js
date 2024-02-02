@@ -4,9 +4,9 @@ import "./App.css";
 
 import NavigationBar from "./components/NavigationBar/NavigationBar";
 import MapView from "./pages/MapView/MapView";
-import RawDataView from "./pages/RawDataView/RawDataView";
-import StatisticsDayView from "./pages/StatisticsView/Day/StatisticsDayView";
-import StatisticsMonthView from "./pages/StatisticsView/Month/StatisticsMonthView";
+import RawDataView from "./pages/RawDataView/RawDataView.js";
+import ErrDataView from "./pages/ErrDataView/ErrDataView.js";
+import NodeInfoView from "./pages/NodeInfoView/NodeInfoView.js";
 import Footer from "./components/Footer/Footer";
 
 function App() {
@@ -18,8 +18,8 @@ function App() {
         <Routes>
           <Route path="/" element={<MapView />} />
           <Route path="/rawDataView" element={<RawDataView />} />
-          {/* <Route path="/errDataView" element={<ErrDataView />} />
-          <Route path="/nodeInfoView" element={<NodeInfoView />} /> */}
+          <Route path="/errDataView" element={<ErrDataView />} />
+          <Route path="/nodeInfoView" element={<NodeInfoView />} />
         </Routes>
       </div>
       <Footer />

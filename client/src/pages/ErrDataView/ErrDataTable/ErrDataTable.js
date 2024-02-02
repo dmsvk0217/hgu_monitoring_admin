@@ -7,7 +7,7 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 
-import "./CustomTable.css";
+import "./ErrDataTable.css";
 
 const CustomTable = ({ data, columns }) => {
   const table = useReactTable({
@@ -15,6 +15,12 @@ const CustomTable = ({ data, columns }) => {
     columns,
     getCoreRowModel: getCoreRowModel(),
   });
+
+  const handleEdit = (row, cell) => {
+    console.log("🚀 ~ handleEdit ~ cell:", cell);
+    console.log("🚀 ~ handleEdit ~ row:", row);
+    // Handle edit button click
+  };
 
   return (
     <div className="CustomTable">
@@ -41,6 +47,9 @@ const CustomTable = ({ data, columns }) => {
               {row.getVisibleCells().map((cell) => (
                 <td key={cell.id}>
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                  {cell.id.includes("edit") ? (
+                    <button onClick={() => handleEdit(row, cell)}>Edit</button>
+                  ) : null}
                 </td>
               ))}
             </tr>
