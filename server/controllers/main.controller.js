@@ -85,7 +85,7 @@ exports.updateErrDataById = async (req, res) => {
   if (!errCause && !solution && !done)
     return res
       .status(400)
-      .json({ error: "At least one target update fields is required" });
+      .json({ error: "At least one target update field is required" });
   if (!isValidDateFormat(date))
     return res.status(400).send({ error: "date is not valid date format" });
 
@@ -103,15 +103,8 @@ exports.updateErrDataById = async (req, res) => {
 
   try {
     const errDataDayRef = db.doc(query);
-    const documentSnapshot = await errDataDayRef.get();
-    if (!documentSnapshot.exists) {
-      console.log(`[updateErrDataOne] document does not exist ${query}`);
-      return res.status(500).send({
-        error: `[updateErrDataOne] document does not exist ${query}`,
-      });
-    }
-
     await errDataDayRef.update(updateObject);
+
     const updatedDocumentSnapshot = await errDataDayRef.get();
     dataObject["data"] = updatedDocumentSnapshot.data();
   } catch (error) {
@@ -125,10 +118,43 @@ exports.updateErrDataById = async (req, res) => {
   return res.status(200).json(dataObject);
 };
 
-// router.post("/nodeInfo", mainController.createNodeInfo);
-
 // router.put("/nodeInfo", mainController.updateNodeInfo);
+
 // router.delete("/nodeInfo", mainController.deleteNodeInfo);
+
+exports.updateNodeInfo = async (req, res) => {
+  // 노드번호	노드위치	위도	경도	베터리잔량
+  const { nodeAddress, location, latitude, longitude, id } = req.body;
+  if (!id) return res.status(400).json({ error: "id field is required" });
+  if (!nodeAddress && !location && !latitude && !longitude)
+    return res.status(400).json({ error: "At least one field is required" });
+
+  const query = querys.updateNodeInfoQuery(id);
+  let dataObject = {
+    type: "updateNodeInfo",
+  };
+  let updateObject = {};
+  if (nodeAddress) updateObject["nodeAddress"] = nodeAddress;
+  if (location) updateObject["location"] = location;
+  if (latitude) updateObject["latitude"] = latitude;
+  if (longitude) updateObject["longitude"] = longitude;
+
+  try {
+    const nodeInfoRef = db.doc(query);
+    await nodeInfoRef.update(updateObject);
+
+    const updatedDocumentSnapshot = await nodeInfoRef.get();
+    dataObject["data"] = updatedDocumentSnapshot.data();
+  } catch (error) {
+    console.log("[updateNodeInfo]", error);
+    return res.status(500).json({
+      error: `[updateNodeInfo] ${error}`,
+    });
+  }
+
+  console.log(`updateNodeInfo done`);
+  return res.status(200).json(dataObject);
+};
 
 exports.createNodeInfo = async (req, res) => {
   // 노드번호	노드위치	위도	경도	베터리잔량
@@ -145,7 +171,7 @@ exports.createNodeInfo = async (req, res) => {
   let addObject = {
     nodeAddress: nodeAddress,
     location: location,
-    nodeAddlatituderess: latitude,
+    latitude: latitude,
     longitude: longitude,
     battrey: "?%",
   };

@@ -17,3 +17,7 @@ exports.getNodeInfoQuery = () => {
 exports.createNodeInfoQuery = () => {
   return `node-info`;
 };
+
+exports.updateNodeInfoQuery = (id) => {
+  return `node-info/${id}`;
+};
