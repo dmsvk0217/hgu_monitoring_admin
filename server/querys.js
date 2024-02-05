@@ -21,3 +21,7 @@ exports.createNodeInfoQuery = () => {
 exports.updateNodeInfoQuery = (id) => {
   return `node-info/${id}`;
 };
+
+exports.deleteNodeInfoQuery = (id) => {
+  return `node-info/${id}`;
+};

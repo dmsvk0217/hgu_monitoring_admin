@@ -118,9 +118,29 @@ exports.updateErrDataById = async (req, res) => {
   return res.status(200).json(dataObject);
 };
 
-// router.put("/nodeInfo", mainController.updateNodeInfo);
+exports.deleteNodeInfo = async (req, res) => {
+  const { id } = req.body;
+  if (!id) return res.status(400).json({ error: "id field is required" });
 
-// router.delete("/nodeInfo", mainController.deleteNodeInfo);
+  const query = querys.deleteNodeInfoQuery(id);
+  let dataObject = {
+    type: "deleteNodeInfo",
+  };
+
+  try {
+    const nodeInfoRef = db.doc(query);
+    await nodeInfoRef.delete();
+    dataObject["result"] = "deleteNodeInfo done";
+  } catch (error) {
+    console.log("[deleteNodeInfo]", error);
+    return res.status(500).json({
+      error: `[deleteNodeInfo] ${error}`,
+    });
+  }
+
+  console.log(`deleteNodeInfo done`);
+  return res.status(200).json(dataObject);
+};
 
 exports.updateNodeInfo = async (req, res) => {
   // 노드번호	노드위치	위도	경도	베터리잔량
