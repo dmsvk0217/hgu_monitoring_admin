@@ -1,0 +1,10 @@
+{
+  "type": "updateNodeInfo",
+  "data": {
+    "battrey": "?%",
+    "latitude": "35.1032734",
+    "location": "채플",
+    "nodeAddress": "4",
+    "longitude": "128.3893488"
+  }
+}

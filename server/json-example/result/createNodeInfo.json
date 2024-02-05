@@ -1,0 +1,11 @@
+{
+  "type": "createNodeInfo",
+  "result": "createNodeInfo done",
+  "data": {
+    "nodeAddress": "4",
+    "location": "채플",
+    "latitude": "35.1032734",
+    "longitude": "129.3893488",
+    "battrey": "?%"
+  }
+}

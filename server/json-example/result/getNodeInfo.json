@@ -1,0 +1,21 @@
+{
+  "type": "getNodeInfo",
+  "data": [
+    {
+      "battrey": "?%",
+      "latitude": "35.1032734",
+      "location": "현동홀",
+      "nodeAddress": "1",
+      "longitude": "129.3893488",
+      "id": "juMHdF0Cl4STa3YOAUhO"
+    },
+    {
+      "battrey": "?%",
+      "latitude": "35.1032734",
+      "location": "뉴턴홀",
+      "nodeAddress": "2",
+      "longitude": "129.3893488",
+      "id": "rukK85RvRv9PtwQxm8of"
+    }
+  ]
+}
