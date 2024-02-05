@@ -183,8 +183,9 @@ exports.getNodeInfo = async (req, res) => {
     }
 
     snapshot.forEach((doc) => {
-      console.log("getNodeInfo doc.data():", doc.data());
-      dataObject["data"].push(doc.data());
+      let docData = doc.data();
+      docData["id"] = doc.id;
+      dataObject["data"].push(docData);
     });
   } catch (error) {
     console.log("[getNodeInfo]", error);
