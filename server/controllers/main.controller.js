@@ -193,7 +193,7 @@ exports.createNodeInfo = async (req, res) => {
     location: location,
     latitude: latitude,
     longitude: longitude,
-    battrey: "?%",
+    battery: "?%",
   };
 
   try {
