@@ -1,12 +1,6 @@
 const db = require("../firebase/firebase.js");
 const querys = require("../querys.js");
 
-/*
-  request body
-  {
-    "date":"2024-01-22"
-  }
-*/
 exports.getRawDataInDay = async (req, res) => {
   const { date } = req.body;
   if (!date) return res.status(400).json({ error: "All fields are required" });
@@ -83,8 +77,8 @@ exports.getErrDataInDay = async (req, res) => {
   return res.status(200).json(dataObject);
 };
 
-// 에러원인, 해결방안, 처리여부
 exports.updateErrDataById = async (req, res) => {
+  // 에러원인, 해결방안, 처리여부
   const { date, id, errCause, solution, done } = req.body;
   if (!date || !id)
     return res.status(400).json({ error: "data and id fields are required" });
@@ -128,6 +122,78 @@ exports.updateErrDataById = async (req, res) => {
   }
 
   console.log(`[${yyyyMM}-${dayDD}] updateErrDataOne done`);
+  return res.status(200).json(dataObject);
+};
+
+// router.post("/nodeInfo", mainController.createNodeInfo);
+
+// router.put("/nodeInfo", mainController.updateNodeInfo);
+// router.delete("/nodeInfo", mainController.deleteNodeInfo);
+
+exports.createNodeInfo = async (req, res) => {
+  // 노드번호	노드위치	위도	경도	베터리잔량
+  const { nodeAddress, location, latitude, longitude } = req.body;
+  if (!nodeAddress || !location || !latitude || !longitude)
+    return res.status(400).json({ error: "All fields are required" });
+
+  const query = querys.createNodeInfoQuery();
+  let dataObject = {
+    type: "createNodeInfo",
+    result: "createNodeInfo done",
+    data: {},
+  };
+  let addObject = {
+    nodeAddress: nodeAddress,
+    location: location,
+    nodeAddlatituderess: latitude,
+    longitude: longitude,
+    battrey: "?%",
+  };
+
+  try {
+    const nodeInfoRef = db.collection(query);
+    await nodeInfoRef.add(addObject);
+    dataObject["data"] = addObject;
+  } catch (error) {
+    console.log("[createNodeInfo]", error);
+    return res.status(500).json({
+      error: `[createNodeInfo] ${error}`,
+    });
+  }
+
+  console.log(`createNodeInfo done`);
+  return res.status(200).json(dataObject);
+};
+
+exports.getNodeInfo = async (req, res) => {
+  const query = querys.getNodeInfoQuery();
+  let dataObject = {
+    type: "getNodeInfo",
+    data: [],
+  };
+
+  try {
+    const nodeInfoRef = db.collection(query);
+    const snapshot = await nodeInfoRef.get();
+    if (snapshot.empty) {
+      console.log(`[getNodeInfo] snapshot.empty ${query}`);
+      return res.status(500).send({
+        error: `[getNodeInfo] snapshot.empty ${query}`,
+      });
+    }
+
+    snapshot.forEach((doc) => {
+      console.log("getNodeInfo doc.data():", doc.data());
+      dataObject["data"].push(doc.data());
+    });
+  } catch (error) {
+    console.log("[getNodeInfo]", error);
+    return res.status(500).json({
+      error: `[getNodeInfo] ${error}`,
+    });
+  }
+
+  console.log(`getNodeInfo done`);
   return res.status(200).json(dataObject);
 };
 

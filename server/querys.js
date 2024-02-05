@@ -9,3 +9,11 @@ exports.getErrDataQuery = (yyyyMM, dayDD) => {
 exports.getErrDataByIdQuery = (yyyyMM, dayDD, id) => {
   return `err-data/${yyyyMM}/day${dayDD}/${id}`;
 };
+
+exports.getNodeInfoQuery = () => {
+  return `node-info`;
+};
+
+exports.createNodeInfoQuery = () => {
+  return `node-info`;
+};
