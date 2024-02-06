@@ -8,7 +8,6 @@
 
 /firebase
 /node_modules
-/test/*
 
 # testing
 /coverage
