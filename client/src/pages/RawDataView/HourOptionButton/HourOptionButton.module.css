@@ -1,4 +1,7 @@
-dd {
+.select_unit {
+}
+
+.hour_option_dd {
   text-align: center;
   padding: 10px 2px;
   border: 1px solid lightslategray;
@@ -8,7 +11,7 @@ dd {
   cursor: pointer;
 }
 
-dl {
+.hour_option_dl {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -16,7 +19,7 @@ dl {
   margin-bottom: 10px;
 }
 
-dd.active {
+.hour_option_dd.active {
   border: 1px solid #55b76b;
   background-color: #55b76b;
   color: white;
@@ -24,7 +27,7 @@ dd.active {
 }
 
 @media screen and (max-width: 450px) {
-  dl {
+  .hour_option_dl {
     font-size: 0.7em;
   }
 }
