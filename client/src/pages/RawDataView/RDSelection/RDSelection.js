@@ -68,14 +68,14 @@ function RDSelection() {
               />
             </div>
           </div>
-          <div className="RD-table-location">
+          {/* <div className="RD-table-location">
             <p>시간단위</p>
             <CustomDropDown
               optionData={selectHourOptions}
               selectedValue={selectedHour}
               handleSelectedValue={handleHourSelect}
             />
-          </div>
+          </div> */}
         </div>
 
         <div className="search-btn-container">

@@ -9,7 +9,7 @@ import {
 
 import "./CustomTable.css";
 
-const CustomTable = ({ data, columns }) => {
+const CustomTable = ({ data, columns, selectedHourOption }) => {
   const table = useReactTable({
     data,
     columns,
