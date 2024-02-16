@@ -14,21 +14,28 @@ const HourOptionButton = ({ selectedHourOption, handleOptionClick }) => {
 
   return (
     <dl className="select-unit">
-      {numbers.map((number) => (
-        <dd
-          key={number}
-          className={
-            selectedHourOption === `${number * 3}:00-${number * 3 + 3}:00`
-              ? "active"
-              : ""
-          }
-          onClick={() =>
-            handleOptionClick(`${number * 3}:00-${number * 3 + 3}:00`)
-          }
-        >
-          {number * 3}:00-{number * 3 + 3}:00
-        </dd>
-      ))}
+      {numbers.map((number) => {
+        let divStyle;
+        const classNameStr =
+          selectedHourOption === `${number * 3}:00-${number * 3 + 3}:00`
+            ? "active"
+            : "";
+
+        if (number != 0) divStyle = { borderLeft: "none" };
+
+        return (
+          <dd
+            key={number}
+            className={classNameStr}
+            style={divStyle}
+            onClick={() =>
+              handleOptionClick(`${number * 3}:00-${number * 3 + 3}:00`)
+            }
+          >
+            {number * 3}:00-{number * 3 + 3}:00
+          </dd>
+        );
+      })}
     </dl>
   );
 };
