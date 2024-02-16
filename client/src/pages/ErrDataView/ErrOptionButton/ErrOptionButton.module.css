@@ -1,0 +1,36 @@
+.err-select-unit {
+  display: flex;
+  justify-content: end;
+}
+
+.err-option-dl {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.err-option-dd {
+  text-align: center;
+  padding: 10px 2px;
+  border: 1px solid lightslategray;
+  color: lightslategray;
+  width: 100%;
+  font-size: 0.9em;
+  cursor: pointer;
+}
+
+.err-option-dd.active {
+  border: 1px solid #55b76b;
+  background-color: #55b76b;
+  color: white;
+  font-weight: bold;
+}
+
+@media screen and (max-width: 450px) {
+  .err-option-dl {
+    font-size: 0.7em;
+  }
+}
