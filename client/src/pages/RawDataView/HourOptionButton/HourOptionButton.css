@@ -1,0 +1,30 @@
+dd {
+  text-align: center;
+  padding: 10px 2px;
+  border: 1px solid lightslategray;
+  color: lightslategray;
+  width: 100%;
+  font-size: 1.2em;
+  cursor: pointer;
+}
+
+dl {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+dd.active {
+  border: 1px solid #55b76b;
+  background-color: #55b76b;
+  color: white;
+  font-weight: bold;
+}
+
+@media screen and (max-width: 450px) {
+  dl {
+    font-size: 0.7em;
+  }
+}

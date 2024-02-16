@@ -40,7 +40,7 @@ const locationFromNodeNumberOptions = {
 
 for (let i = 1; i <= 15; i++)
   addNodeInfo({
-    nodeAddress: i,
+    nodeAddress: String(i),
     location: locationFromNodeNumberOptions[i],
     latitude: positionOfNode[i].lat,
     longitude: positionOfNode[i].lng,
