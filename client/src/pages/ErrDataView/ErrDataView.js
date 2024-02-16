@@ -13,12 +13,16 @@ function ErrDataView() {
 
   const handleOptionClick = (option) => {
     setSelectedDoneOption(option);
-    setcalTableData(
-      tableData.filter((item) => {
-        const done = item.done;
-        return done;
-      }) || []
-    );
+    if (option == "all") {
+      setcalTableData(tableData || []);
+    }
+    if (option == "onlyDone") {
+      setcalTableData(
+        tableData.filter((item) => {
+          return item.done == "yes";
+        }) || []
+      );
+    }
   };
 
   return (
@@ -30,13 +34,12 @@ function ErrDataView() {
           selectedDoneOption={selectedDoneOption}
           handleOptionClick={handleOptionClick}
         />
-        <ExcelDownloadButton
-          data={caltableData ? caltableData : []}
-        ></ExcelDownloadButton>
+        <ExcelDownloadButton data={caltableData ? caltableData : []} />
         <ErrDataTable
           data={caltableData ? caltableData : []}
           columns={columns}
-        ></ErrDataTable>
+          selectedDoneOption={selectedDoneOption}
+        />
       </div>
     </div>
   );

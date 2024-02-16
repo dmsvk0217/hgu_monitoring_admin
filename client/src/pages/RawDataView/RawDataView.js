@@ -40,14 +40,12 @@ function RawDataView() {
           selectedHourOption={selectedHourOption}
           handleOptionClick={handleOptionClick}
         />
-        <ExcelDownloadButton
-          data={caltableData ? caltableData : []}
-        ></ExcelDownloadButton>
+        <ExcelDownloadButton data={caltableData ? caltableData : []} />
         <CustomTable
           data={caltableData ? caltableData : []}
           columns={columns}
           selectedHourOption={selectedHourOption}
-        ></CustomTable>
+        />
       </div>
     </div>
   );
