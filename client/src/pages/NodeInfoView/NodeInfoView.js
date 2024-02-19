@@ -1,20 +1,30 @@
-import React from "react";
+import React, { useState } from "react";
 import "./NodeInfoView.css";
 import NIDataTable from "./NIDataTable/NIDataTable.js";
+import NIModal from "./NIModal/NIModal.js";
 import { columns, tableData } from "./NITableConfig.js";
 
 function NodeInfoView() {
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const openModal = () => {
+    setModalIsOpen(true);
+  };
+  const closeModal = () => {
+    setModalIsOpen(false);
+  };
+  const [rowObject, setRowObject] = useState({});
+
   return (
     <div className="NI-container">
       <p className="NI-title">노드 정보 보기</p>
       <div className="NI-content-container">
-        <div className="add-button-container">
-          <button>add</button>
-        </div>
+        <NIModal modalIsOpen={modalIsOpen} closeModal={closeModal} rowObject={rowObject} />
+        <div className="add-button-container">노드추가</div>
         <NIDataTable
           data={tableData ? tableData : []}
           columns={columns}
-        ></NIDataTable>
+          openModal={openModal}
+          setRowObject={setRowObject}></NIDataTable>
       </div>
     </div>
   );

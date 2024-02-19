@@ -15,6 +15,7 @@ export const columns = [
   columnHelper.accessor("longitude", { header: "경도", size: 70 }),
   columnHelper.accessor("battery", { header: "베터리잔량", size: 70 }),
   columnHelper.accessor("editButton", { header: "수정하기", size: 20 }),
+  columnHelper.accessor("deleteButton", { header: "삭제하기", size: 20 }),
 ];
 
 export const tableData = [

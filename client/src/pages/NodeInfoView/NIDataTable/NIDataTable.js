@@ -6,10 +6,12 @@ import {
   getCoreRowModel,
   useReactTable,
 } from "@tanstack/react-table";
+import { BiSolidEdit } from "react-icons/bi";
+import { RiDeleteBin6Line } from "react-icons/ri";
 
 import "./NIDataTable.css";
 
-const CustomTable = ({ data, columns }) => {
+const CustomTable = ({ data, columns, openModal, setRowObject }) => {
   const table = useReactTable({
     data,
     columns,
@@ -17,9 +19,15 @@ const CustomTable = ({ data, columns }) => {
   });
 
   const handleEdit = (row, cell) => {
-    console.log("🚀 ~ handleEdit ~ cell:", cell);
-    console.log("🚀 ~ handleEdit ~ row:", row);
-    // Handle edit button click
+    console.log(row.original);
+    setRowObject(row.original);
+    openModal();
+  };
+
+  const handleDelete = (row, cell) => {
+    console.log(row.original);
+    setRowObject(row.original);
+    openModal();
   };
 
   return (
@@ -32,10 +40,7 @@ const CustomTable = ({ data, columns }) => {
                 <th key={header.id} style={{ width: header.getSize() }}>
                   {header.isPlaceholder
                     ? null
-                    : flexRender(
-                        header.column.columnDef.header,
-                        header.getContext()
-                      )}
+                    : flexRender(header.column.columnDef.header, header.getContext())}
                 </th>
               ))}
             </tr>
@@ -48,7 +53,13 @@ const CustomTable = ({ data, columns }) => {
                 <td key={cell.id}>
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}
                   {cell.id.includes("edit") ? (
-                    <button onClick={() => handleEdit(row, cell)}>Edit</button>
+                    <BiSolidEdit className="ni-edit-button" onClick={() => handleEdit(row, cell)} />
+                  ) : null}
+                  {cell.id.includes("delete") ? (
+                    <RiDeleteBin6Line
+                      className="ni-edit-button"
+                      onClick={() => handleDelete(row, cell)}
+                    />
                   ) : null}
                 </td>
               ))}
