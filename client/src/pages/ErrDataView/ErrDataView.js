@@ -19,10 +19,10 @@ function ErrDataView() {
     if (option == "all") {
       setcalTableData(tableData || []);
     }
-    if (option == "onlyDone") {
+    if (option == "notYet") {
       setcalTableData(
         tableData.filter((item) => {
-          return item.done == "yes";
+          return item.done == "no";
         }) || []
       );
     }

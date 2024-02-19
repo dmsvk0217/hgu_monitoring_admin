@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import style from "./ErrOptionButton.module.css";
 
 const ErrOptionButton = ({ selectedDoneOption, handleOptionClick }) => {
@@ -14,9 +14,9 @@ const ErrOptionButton = ({ selectedDoneOption, handleOptionClick }) => {
         </dd>
         <dd
           className={`${style["err-option-dd"]} ${
-            selectedDoneOption === "onlyDone" ? style.active : ""
+            selectedDoneOption === "notYet" ? style.active : ""
           }`}
-          onClick={() => handleOptionClick("onlyDone")}>
+          onClick={() => handleOptionClick("notYet")}>
           미처리건만 보기
         </dd>
       </dl>
