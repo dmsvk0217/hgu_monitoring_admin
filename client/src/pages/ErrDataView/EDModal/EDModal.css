@@ -25,7 +25,7 @@
 }
 
 .err-edit-modal--header {
-  color: green;
+  color: rgba(85, 183, 107);
   font-size: 25px;
   font-weight: bold;
   margin-top: 10px;
