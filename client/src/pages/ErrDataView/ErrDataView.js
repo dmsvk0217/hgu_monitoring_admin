@@ -1,10 +1,13 @@
 import React, { useState } from "react";
-import "./ErrDataView.css";
+import { columns, tableData } from "./EDTableConfig.js";
+
 import RDSelection from "./EDSelection/EDSelection.js";
 import ErrDataTable from "./ErrDataTable/ErrDataTable.js";
 import ExcelDownloadButton from "../../components/DownloadButton/DownloadButton.js";
-import { columns, tableData } from "./EDTableConfig.js";
 import ErrOptionButton from "./ErrOptionButton/ErrOptionButton.js";
+import EDModal from "./EDModal/EDModal.js";
+
+import "./ErrDataView.css";
 
 function ErrDataView() {
   const [selectedDoneOption, setSelectedDoneOption] = useState("all");
@@ -25,10 +28,20 @@ function ErrDataView() {
     }
   };
 
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const openModal = () => {
+    setModalIsOpen(true);
+  };
+  const closeModal = () => {
+    setModalIsOpen(false);
+  };
+  const [rowObject, setRowObject] = useState({});
+
   return (
     <div className="ED-container">
       <p className="ED-title">에러 데이터 보기</p>
       <div className="ED-content-container">
+        <EDModal modalIsOpen={modalIsOpen} closeModal={closeModal} rowObject={rowObject} />
         <RDSelection />
         <ErrOptionButton
           selectedDoneOption={selectedDoneOption}
@@ -39,6 +52,8 @@ function ErrDataView() {
           data={caltableData ? caltableData : []}
           columns={columns}
           selectedDoneOption={selectedDoneOption}
+          openModal={openModal}
+          setRowObject={setRowObject}
         />
       </div>
     </div>

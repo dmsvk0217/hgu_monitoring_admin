@@ -21,9 +21,7 @@ export const columns = [
     header: "수정하기",
     size: 30,
     Cell: ({ row }) => (
-      <button onClick={() => handleTableButtonClick(row.original.id)}>
-        Edit
-      </button>
+      <button onClick={() => handleTableButtonClick(row.original.id)}>Edit</button>
     ),
   }),
 ];
@@ -39,6 +37,7 @@ export const tableData = [
     timestamp: "15:36:14",
     nodeAddress: "9",
     location: "현동홀",
+    id: "05CZRhogTicXVCn1wFCf",
   },
   {
     sequence: "1",
@@ -50,6 +49,7 @@ export const tableData = [
     timestamp: "15:36:14",
     nodeAddress: "9",
     location: "현동홀",
+    id: "05CZRhogTicXVCn1wFCf",
   },
   {
     sequence: "1",
@@ -61,6 +61,7 @@ export const tableData = [
     timestamp: "15:36:14",
     nodeAddress: "9",
     location: "현동홀",
+    id: "05CZRhogTicXVCn1wFCf",
   },
   {
     sequence: "1",
@@ -72,6 +73,7 @@ export const tableData = [
     timestamp: "15:36:14",
     nodeAddress: "9",
     location: "현동홀",
+    id: "05CZRhogTicXVCn1wFCf",
   },
   {
     sequence: "1",
@@ -83,6 +85,7 @@ export const tableData = [
     timestamp: "15:36:14",
     nodeAddress: "9",
     location: "현동홀",
+    id: "05CZRhogTicXVCn1wFCf",
   },
   {
     sequence: "1",
@@ -94,5 +97,6 @@ export const tableData = [
     timestamp: "15:36:14",
     nodeAddress: "9",
     location: "현동홀",
+    id: "05CZRhogTicXVCn1wFCf",
   },
 ];

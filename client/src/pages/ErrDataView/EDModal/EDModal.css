@@ -1,0 +1,120 @@
+.err_edit_modal {
+  border-radius: 8px;
+  max-width: 600px;
+  width: 100%;
+  padding: 20px;
+  background-color: white;
+}
+
+.Overlay {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5); /* 모달 외부 배경의 투명도 조절 */
+}
+
+.err-edit-modal--container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.err-edit-modal--header {
+  color: green;
+  font-size: 25px;
+  font-weight: bold;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.err-edit-modal-content-container {
+  width: 90%;
+}
+
+.err-edit-modal-content {
+  width: 100%;
+}
+
+.err-edit-modal-content--divider {
+  width: 100%;
+  border: 1px solid lightgrey;
+  margin-bottom: 10px;
+}
+
+.err-edit-modal-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.err-edit-modal-content-container--container {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  padding: 10px;
+}
+
+.err-edit-modal-content--label {
+  width: 20%;
+  margin-right: 10%;
+  margin-top: auto;
+  margin-bottom: auto;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.err-edit-modal-content--field--text {
+  border-radius: 5px;
+  background-color: lightgray;
+  width: 100%;
+  margin: auto;
+  padding: 10px;
+  font-size: 14px;
+}
+
+.err-edit-modal-content--field--input {
+  border-radius: 5px;
+  border: 1px solid gray;
+  width: 100%;
+  margin: auto;
+  padding: 10px;
+  font-size: 14px;
+  font-weight: lighter;
+}
+
+.err-edit-modal--button-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 10px;
+  width: 70%;
+}
+
+.err-edit-modal--concel {
+  background-color: rgba(81, 81, 81, 1);
+  border: none;
+  width: 25%;
+  padding: 10px 30px;
+  text-align: center;
+  border-radius: 10px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.err-edit-modal--done {
+  background-color: rgba(85, 183, 107);
+  border: none;
+  width: 25%;
+  padding: 10px 30px;
+  text-align: center;
+  border-radius: 10px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  margin-left: 20px;
+}

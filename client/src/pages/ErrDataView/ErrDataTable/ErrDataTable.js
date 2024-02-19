@@ -1,15 +1,15 @@
 // CustomTable.js
-import React from "react";
+import React, { useState } from "react";
 import {
   createColumnHelper,
   flexRender,
   getCoreRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-
+import { BiSolidEdit } from "react-icons/bi";
 import "./ErrDataTable.css";
 
-const CustomTable = ({ data, columns }) => {
+const CustomTable = ({ data, columns, openModal, setRowObject }) => {
   const table = useReactTable({
     data,
     columns,
@@ -17,9 +17,9 @@ const CustomTable = ({ data, columns }) => {
   });
 
   const handleEdit = (row, cell) => {
-    console.log("🚀 ~ handleEdit ~ cell:", cell);
-    console.log("🚀 ~ handleEdit ~ row:", row);
-    // Handle edit button click
+    console.log(row.original);
+    setRowObject(row.original);
+    openModal();
   };
 
   return (
@@ -40,12 +40,17 @@ const CustomTable = ({ data, columns }) => {
         </thead>
         <tbody>
           {table.getRowModel().rows.map((row) => (
-            <tr key={row.id}>
+            <tr
+              key={row.id}
+              style={{ backgroundColor: row.original.done === "yes" ? "white" : "oldlace" }}>
               {row.getVisibleCells().map((cell) => (
                 <td key={cell.id}>
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}
                   {cell.id.includes("edit") ? (
-                    <button onClick={() => handleEdit(row, cell)}>Edit</button>
+                    <BiSolidEdit
+                      className="err-edit-button"
+                      onClick={() => handleEdit(row, cell)}
+                    />
                   ) : null}
                 </td>
               ))}
