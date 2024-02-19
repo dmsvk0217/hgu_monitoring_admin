@@ -20,8 +20,8 @@ export const columns = [
 
 export const tableData = [
   {
-    nodeAddress: "4",
-    location: "현동홀",
+    nodeAddress: "5",
+    location: "뉴턴홀",
     longitude: "129.3893488",
     latitude: "36.1032734",
     battery: "47%",

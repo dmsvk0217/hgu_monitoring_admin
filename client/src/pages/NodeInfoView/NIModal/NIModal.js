@@ -9,9 +9,15 @@ function NIModal({ modalIsOpen, closeModal, rowObject }) {
   // console.log("🚀 ~ NIModal ~ rowObject:", rowObject.longitude);
   // console.log("🚀 ~ NIModal ~ rowObject:", rowObject.latitude);
 
-  const [location, setlocation] = useState("현동홀");
+  const [location, setlocation] = useState(rowObject.location);
   const [longitude, setlongitude] = useState(rowObject.longitude);
   const [latitude, setlatitude] = useState(rowObject.latitude);
+
+  useEffect(() => {
+    setlocation(rowObject.location);
+    setlongitude(rowObject.longitude);
+    setlatitude(rowObject.latitude);
+  }, [modalIsOpen == true]);
 
   const editDoneHandler = async () => {
     console.log("🚀 ~ NIModal ~ location:", location);
