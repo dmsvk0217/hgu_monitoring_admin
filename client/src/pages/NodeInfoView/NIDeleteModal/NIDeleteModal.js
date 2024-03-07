@@ -2,55 +2,17 @@ import React, { useState, useEffect } from "react";
 import Modal from "react-modal";
 import "./NIDeleteModal.css";
 
-function NIDeleteModal({ deleteModalIsOpen, closeDeleteModal, rowObject }) {
+import { deleteNodeInfoById } from "../../../api/axiosApi";
+import { useQuery } from "@tanstack/react-query";
+import { fetchNodeInfo } from "../../../api/axiosApi.js";
+
+function NIDeleteModal({ deleteModalIsOpen, closeDeleteModal, rowObject, setIsUpdatedNode }) {
   Modal.setAppElement("#root");
 
-  // console.log("🚀 ~ NIDeleteModal ~ rowObject:", rowObject.location);
-  // console.log("🚀 ~ NIDeleteModal ~ rowObject:", rowObject.longitude);
-  // console.log("🚀 ~ NIDeleteModal ~ rowObject:", rowObject.latitude);
-
-  const [location, setlocation] = useState(rowObject.location);
-  const [longitude, setlongitude] = useState(rowObject.longitude);
-  const [latitude, setlatitude] = useState(rowObject.latitude);
-
-  useEffect(() => {
-    setlocation(rowObject.location);
-    setlongitude(rowObject.longitude);
-    setlatitude(rowObject.latitude);
-  }, [deleteModalIsOpen == true]);
-
-  const editDoneHandler = async () => {
-    console.log("🚀 ~ NIDeleteModal ~ location:", location);
-    console.log("🚀 ~ NIDeleteModal ~ longitude:", longitude);
-    console.log("🚀 ~ NIDeleteModal ~ latitude:", latitude);
-    console.log("🚀 ~ NIDeleteModal ~ rowObject:", rowObject);
-
-    //Todo: ni data edit API 연동하기
-    //await
-
-    setlocation("");
-    setlongitude("");
-    setlatitude("");
+  const deleteHandler = async () => {
+    await deleteNodeInfoById(rowObject.id);
+    setIsUpdatedNode(true);
     closeDeleteModal();
-  };
-
-  const editCancelHandler = () => {
-    setlocation("");
-    setlongitude("");
-    setlatitude("");
-    closeDeleteModal();
-  };
-
-  const locationHandler = (e) => {
-    setlocation(e.target.value);
-  };
-
-  const longitudeHandler = (e) => {
-    setlongitude(e.target.value);
-  };
-
-  const latitudeHandler = (e) => {
-    setlatitude(e.target.value);
   };
 
   return (
@@ -63,19 +25,22 @@ function NIDeleteModal({ deleteModalIsOpen, closeDeleteModal, rowObject }) {
       <div className="ni-edit-modal--container">
         <div className="ni-edit-modal--header">노드 삭제</div>
         <div className="ni-edit-modal-content-container">
-          <div className="ni-edit-modal-content">
-            <div className="ni-edit-modal-content--divider"></div>
-            <div className="ni-edit-modal-content-container--container">
-              <div className="ni-edit-modal-content--label">정말로 삭제하시겠습니까?</div>
-            </div>
-          </div>
+          <div className="ni-edit-modal-content--divider"></div>
+          <div className="ni-edit-modal-content--label">정말로 삭제하시겠습니까?</div>
+          <div className="ni-edit-modal-content--divider"></div>
+          <div className="ni-edit-modal-content--label">ID: {rowObject.id}</div>
+          <div className="ni-edit-modal-content--label">노드번호: {rowObject.nodeAddress}</div>
+          <div className="ni-edit-modal-content--label">위치: {rowObject.location}</div>
+          <div className="ni-edit-modal-content--label">위도: {rowObject.latitude}</div>
+          <div className="ni-edit-modal-content--label">경도: {rowObject.longitude}</div>
+          <div className="ni-edit-modal-content--divider"></div>
         </div>
 
         <div className="ni-edit-modal--button-container">
-          <div className="ni-edit-modal--cancel" onClick={editCancelHandler}>
+          <div className="ni-edit-modal--cancel" onClick={closeDeleteModal}>
             취소
           </div>
-          <div className="ni-edit-modal--done" onClick={editDoneHandler}>
+          <div className="ni-edit-modal--done" onClick={deleteHandler}>
             삭제
           </div>
         </div>

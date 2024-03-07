@@ -1,20 +1,33 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./NodeInfoView.css";
 import NIDataTable from "./NIDataTable/NIDataTable.js";
 import NIEditModal from "./NIEditModal/NIEditModal.js";
 import NIDeleteModal from "./NIDeleteModal/NIDeleteModal.js";
 import { columns, tableData } from "./NITableConfig.js";
 
-import { QueryCache } from "@tanstack/react-query";
 import { fetchNodeInfo } from "../../api/axiosApi.js";
-import { useQueryClient, useQuery } from "@tanstack/react-query";
+import axiosInstance from "../../api/axiosInstance.js";
 
 function NodeInfoView() {
   const [rowObject, setRowObject] = useState({});
-  const { isLoading, error, data, isFetching } = useQuery({
-    queryKey: ["nodeInfo"],
-    queryFn: () => fetchNodeInfo(),
-  });
+  const [nodeInfo, setNodeInfo] = useState([]);
+  const [isUpdatedNode, setIsUpdatedNode] = useState(false);
+
+  useEffect(() => {
+    setIsUpdatedNode(false);
+    fetchNodeInfo();
+  }, [isUpdatedNode == true]);
+
+  const fetchNodeInfo = async () => {
+    try {
+      let requestURL = "/api/nodeinfo";
+      const response = await axiosInstance.get(requestURL);
+      response.data.sort((a, b) => a.nodeAddress - b.nodeAddress);
+      setNodeInfo(response.data);
+    } catch (error) {
+      console.error("Error fetching posts:", error);
+    }
+  };
 
   const [editModalIsOpen, setEditModalIsOpen] = useState(false);
   const openEditModal = () => {
@@ -40,15 +53,17 @@ function NodeInfoView() {
           editModalIsOpen={editModalIsOpen}
           closeEditModal={closeEditModal}
           rowObject={rowObject}
+          setIsUpdatedNode={setIsUpdatedNode}
         />
         <NIDeleteModal
           deleteModalIsOpen={deleteModalIsOpen}
           closeDeleteModal={closeDeleteModal}
           rowObject={rowObject}
+          setIsUpdatedNode={setIsUpdatedNode}
         />
         <div className="add-button-container">노드추가</div>
         <NIDataTable
-          data={data ? data : []}
+          data={nodeInfo ? nodeInfo : []}
           columns={columns}
           openEditModal={openEditModal}
           openDeleteModal={openDeleteModal}

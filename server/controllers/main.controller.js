@@ -116,7 +116,8 @@ exports.updateErrDataById = async (req, res) => {
 };
 
 exports.deleteNodeInfo = async (req, res) => {
-  const { id } = req.body;
+  const { id } = req.query;
+  console.log("🚀 ~ exports.deleteNodeInfo ~ id:", id);
   if (!id) return res.status(400).json({ error: "id field is required" });
 
   const query = querys.deleteNodeInfoQuery(id);
