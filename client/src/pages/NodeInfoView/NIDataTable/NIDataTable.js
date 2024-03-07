@@ -11,7 +11,7 @@ import { RiDeleteBin6Line } from "react-icons/ri";
 
 import "./NIDataTable.css";
 
-const CustomTable = ({ data, columns, openModal, setRowObject }) => {
+const CustomTable = ({ data, columns, openEditModal, openDeleteModal, setRowObject }) => {
   const table = useReactTable({
     data,
     columns,
@@ -21,13 +21,13 @@ const CustomTable = ({ data, columns, openModal, setRowObject }) => {
   const handleEdit = (row, cell) => {
     console.log(row.original);
     setRowObject(row.original);
-    openModal();
+    openEditModal();
   };
 
   const handleDelete = (row, cell) => {
     console.log(row.original);
     setRowObject(row.original);
-    openModal();
+    openDeleteModal();
   };
 
   return (

@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import Modal from "react-modal";
-import "./NIModal.css";
+import "./NIEditModal.css";
 
-function NIModal({ modalIsOpen, closeModal, rowObject }) {
+function NIEditModal({ editModalIsOpen, closeEditModal, rowObject }) {
   Modal.setAppElement("#root");
 
-  // console.log("🚀 ~ NIModal ~ rowObject:", rowObject.location);
-  // console.log("🚀 ~ NIModal ~ rowObject:", rowObject.longitude);
-  // console.log("🚀 ~ NIModal ~ rowObject:", rowObject.latitude);
+  // console.log("🚀 ~ NIEditModal ~ rowObject:", rowObject.location);
+  // console.log("🚀 ~ NIEditModal ~ rowObject:", rowObject.longitude);
+  // console.log("🚀 ~ NIEditModal ~ rowObject:", rowObject.latitude);
 
   const [location, setlocation] = useState(rowObject.location);
   const [longitude, setlongitude] = useState(rowObject.longitude);
@@ -17,13 +17,13 @@ function NIModal({ modalIsOpen, closeModal, rowObject }) {
     setlocation(rowObject.location);
     setlongitude(rowObject.longitude);
     setlatitude(rowObject.latitude);
-  }, [modalIsOpen == true]);
+  }, [editModalIsOpen == true]);
 
   const editDoneHandler = async () => {
-    console.log("🚀 ~ NIModal ~ location:", location);
-    console.log("🚀 ~ NIModal ~ longitude:", longitude);
-    console.log("🚀 ~ NIModal ~ latitude:", latitude);
-    console.log("🚀 ~ NIModal ~ rowObject:", rowObject);
+    console.log("🚀 ~ NIEditModal ~ location:", location);
+    console.log("🚀 ~ NIEditModal ~ longitude:", longitude);
+    console.log("🚀 ~ NIEditModal ~ latitude:", latitude);
+    console.log("🚀 ~ NIEditModal ~ rowObject:", rowObject);
 
     //Todo: ni data edit API 연동하기
     //await
@@ -31,14 +31,14 @@ function NIModal({ modalIsOpen, closeModal, rowObject }) {
     setlocation("");
     setlongitude("");
     setlatitude("");
-    closeModal();
+    closeEditModal();
   };
 
   const editCancelHandler = () => {
     setlocation("");
     setlongitude("");
     setlatitude("");
-    closeModal();
+    closeEditModal();
   };
 
   const locationHandler = (e) => {
@@ -57,8 +57,8 @@ function NIModal({ modalIsOpen, closeModal, rowObject }) {
     <Modal
       className="ni_edit_modal"
       overlayClassName="Overlay"
-      isOpen={modalIsOpen}
-      onRequestClose={closeModal}
+      isOpen={editModalIsOpen}
+      onRequestClose={closeEditModal}
       contentLabel="Example Modal">
       <div className="ni-edit-modal--container">
         <div className="ni-edit-modal--header">노드 정보 수정</div>
@@ -119,4 +119,4 @@ function NIModal({ modalIsOpen, closeModal, rowObject }) {
   );
 }
 
-export default NIModal;
+export default NIEditModal;
