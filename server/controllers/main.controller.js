@@ -80,12 +80,9 @@ exports.getErrDataInDay = async (req, res) => {
 exports.updateErrDataById = async (req, res) => {
   // 에러원인, 해결방안, 처리여부
   const { date, id, errCause, solution, done } = req.body;
-  if (!date || !id)
-    return res.status(400).json({ error: "data and id fields are required" });
+  if (!date || !id) return res.status(400).json({ error: "data and id fields are required" });
   if (!errCause && !solution && !done)
-    return res
-      .status(400)
-      .json({ error: "At least one target update field is required" });
+    return res.status(400).json({ error: "At least one target update field is required" });
   if (!isValidDateFormat(date))
     return res.status(400).send({ error: "date is not valid date format" });
 
@@ -213,10 +210,7 @@ exports.createNodeInfo = async (req, res) => {
 
 exports.getNodeInfo = async (req, res) => {
   const query = querys.getNodeInfoQuery();
-  let dataObject = {
-    type: "getNodeInfo",
-    data: [],
-  };
+  let dataObject = [];
 
   try {
     const nodeInfoRef = db.collection(query);
@@ -231,7 +225,7 @@ exports.getNodeInfo = async (req, res) => {
     snapshot.forEach((doc) => {
       let docData = doc.data();
       docData["id"] = doc.id;
-      dataObject["data"].push(docData);
+      dataObject.push(docData);
     });
   } catch (error) {
     console.log("[getNodeInfo]", error);

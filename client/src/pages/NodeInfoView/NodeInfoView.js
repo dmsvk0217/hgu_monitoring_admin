@@ -4,6 +4,10 @@ import NIDataTable from "./NIDataTable/NIDataTable.js";
 import NIModal from "./NIModal/NIModal.js";
 import { columns, tableData } from "./NITableConfig.js";
 
+import { QueryCache } from "@tanstack/react-query";
+import { fetchNodeInfo } from "../../api/axiosApi.js";
+import { useQueryClient, useQuery } from "@tanstack/react-query";
+
 function NodeInfoView() {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const openModal = () => {
@@ -14,6 +18,11 @@ function NodeInfoView() {
   };
   const [rowObject, setRowObject] = useState({});
 
+  const { isLoading, error, data, isFetching } = useQuery({
+    queryKey: ["nodeInfo"],
+    queryFn: () => fetchNodeInfo(),
+  });
+
   return (
     <div className="NI-container">
       <p className="NI-title">노드 정보 보기</p>
@@ -21,7 +30,7 @@ function NodeInfoView() {
         <NIModal modalIsOpen={modalIsOpen} closeModal={closeModal} rowObject={rowObject} />
         <div className="add-button-container">노드추가</div>
         <NIDataTable
-          data={tableData ? tableData : []}
+          data={data ? data : []}
           columns={columns}
           openModal={openModal}
           setRowObject={setRowObject}></NIDataTable>
