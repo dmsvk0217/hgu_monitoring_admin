@@ -6,7 +6,6 @@ import NIDeleteModal from "./NIDeleteModal/NIDeleteModal.js";
 import { columns, tableData } from "./NITableConfig.js";
 
 import { fetchNodeInfo } from "../../api/axiosApi.js";
-import axiosInstance from "../../api/axiosInstance.js";
 
 function NodeInfoView() {
   const [rowObject, setRowObject] = useState({});
@@ -14,23 +13,11 @@ function NodeInfoView() {
   const [isUpdatedNode, setIsUpdatedNode] = useState(false);
   const [isDeletedNode, setIsDeletedNode] = useState(false);
 
-  useEffect(() => {
+  useEffect(async () => {
     setIsUpdatedNode(false);
     setIsDeletedNode(false);
-    fetchNodeInfo();
+    setNodeInfo(await fetchNodeInfo());
   }, [isUpdatedNode == true || isDeletedNode == true]);
-
-  const fetchNodeInfo = async () => {
-    console.log("🚀fetchNodeInfo");
-    try {
-      const requestURL = "/api/nodeinfo";
-      const response = await axiosInstance.get(requestURL);
-      response.data.sort((a, b) => a.nodeAddress - b.nodeAddress);
-      setNodeInfo(response.data);
-    } catch (error) {
-      console.error("Error fetching nodeInfo:", error);
-    }
-  };
 
   const [editModalIsOpen, setEditModalIsOpen] = useState(false);
   const openEditModal = () => {
