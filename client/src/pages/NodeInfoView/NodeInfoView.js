@@ -12,20 +12,23 @@ function NodeInfoView() {
   const [rowObject, setRowObject] = useState({});
   const [nodeInfo, setNodeInfo] = useState([]);
   const [isUpdatedNode, setIsUpdatedNode] = useState(false);
+  const [isDeletedNode, setIsDeletedNode] = useState(false);
 
   useEffect(() => {
     setIsUpdatedNode(false);
+    setIsDeletedNode(false);
     fetchNodeInfo();
-  }, [isUpdatedNode == true]);
+  }, [isUpdatedNode == true || isDeletedNode == true]);
 
   const fetchNodeInfo = async () => {
+    console.log("🚀fetchNodeInfo");
     try {
-      let requestURL = "/api/nodeinfo";
+      const requestURL = "/api/nodeinfo";
       const response = await axiosInstance.get(requestURL);
       response.data.sort((a, b) => a.nodeAddress - b.nodeAddress);
       setNodeInfo(response.data);
     } catch (error) {
-      console.error("Error fetching posts:", error);
+      console.error("Error fetching nodeInfo:", error);
     }
   };
 
@@ -59,7 +62,7 @@ function NodeInfoView() {
           deleteModalIsOpen={deleteModalIsOpen}
           closeDeleteModal={closeDeleteModal}
           rowObject={rowObject}
-          setIsUpdatedNode={setIsUpdatedNode}
+          setIsDeletedNode={setIsDeletedNode}
         />
         <div className="add-button-container">노드추가</div>
         <NIDataTable

@@ -26,3 +26,13 @@ export const deleteNodeInfoById = async (id) => {
 
   return response.data;
 };
+
+export const updateNodeInfo = async (updateObject) => {
+  try {
+    const requestURL = "/api/nodeinfo";
+    await axiosInstance.put(requestURL, updateObject);
+    console.log("🚀updateNodeInfo done");
+  } catch (error) {
+    console.error("Error updating nodeInfo:", error);
+  }
+};

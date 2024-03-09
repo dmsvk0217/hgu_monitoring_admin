@@ -19,7 +19,7 @@ const CustomTable = ({ data, columns, openEditModal, openDeleteModal, setRowObje
   });
 
   const handleEdit = (row, cell) => {
-    console.log(row.original);
+    // console.log(row.original);
     setRowObject(row.original);
     openEditModal();
   };

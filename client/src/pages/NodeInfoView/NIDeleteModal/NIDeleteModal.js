@@ -3,15 +3,13 @@ import Modal from "react-modal";
 import "./NIDeleteModal.css";
 
 import { deleteNodeInfoById } from "../../../api/axiosApi";
-import { useQuery } from "@tanstack/react-query";
-import { fetchNodeInfo } from "../../../api/axiosApi.js";
 
-function NIDeleteModal({ deleteModalIsOpen, closeDeleteModal, rowObject, setIsUpdatedNode }) {
+function NIDeleteModal({ deleteModalIsOpen, closeDeleteModal, rowObject, setIsDeletedNode }) {
   Modal.setAppElement("#root");
 
   const deleteHandler = async () => {
     await deleteNodeInfoById(rowObject.id);
-    setIsUpdatedNode(true);
+    setIsDeletedNode(true);
     closeDeleteModal();
   };
 

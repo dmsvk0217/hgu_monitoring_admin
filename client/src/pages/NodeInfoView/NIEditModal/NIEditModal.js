@@ -2,55 +2,55 @@ import React, { useState, useEffect } from "react";
 import Modal from "react-modal";
 import "./NIEditModal.css";
 
-function NIEditModal({ editModalIsOpen, closeEditModal, rowObject }) {
+import { updateNodeInfo } from "../../../api/axiosApi.js";
+
+function NIEditModal({ editModalIsOpen, closeEditModal, setIsUpdatedNode, rowObject }) {
   Modal.setAppElement("#root");
 
-  // console.log("🚀 ~ NIEditModal ~ rowObject:", rowObject.location);
-  // console.log("🚀 ~ NIEditModal ~ rowObject:", rowObject.longitude);
-  // console.log("🚀 ~ NIEditModal ~ rowObject:", rowObject.latitude);
-
-  const [location, setlocation] = useState(rowObject.location);
-  const [longitude, setlongitude] = useState(rowObject.longitude);
-  const [latitude, setlatitude] = useState(rowObject.latitude);
+  const [updateObject, setupdateObject] = useState({});
 
   useEffect(() => {
-    setlocation(rowObject.location);
-    setlongitude(rowObject.longitude);
-    setlatitude(rowObject.latitude);
+    setupdateObject(rowObject);
   }, [editModalIsOpen == true]);
 
   const editDoneHandler = async () => {
-    console.log("🚀 ~ NIEditModal ~ location:", location);
-    console.log("🚀 ~ NIEditModal ~ longitude:", longitude);
-    console.log("🚀 ~ NIEditModal ~ latitude:", latitude);
-    console.log("🚀 ~ NIEditModal ~ rowObject:", rowObject);
-
-    //Todo: ni data edit API 연동하기
-    //await
-
-    setlocation("");
-    setlongitude("");
-    setlatitude("");
+    await updateNodeInfo(updateObject);
+    setupdateObject({});
+    setIsUpdatedNode(true);
     closeEditModal();
   };
 
   const editCancelHandler = () => {
-    setlocation("");
-    setlongitude("");
-    setlatitude("");
+    setupdateObject({});
     closeEditModal();
   };
 
   const locationHandler = (e) => {
-    setlocation(e.target.value);
+    setupdateObject((prevObject) => ({
+      ...prevObject,
+      location: e.target.value,
+    }));
   };
 
   const longitudeHandler = (e) => {
-    setlongitude(e.target.value);
+    setupdateObject((prevObject) => ({
+      ...prevObject,
+      longitude: e.target.value,
+    }));
   };
 
   const latitudeHandler = (e) => {
-    setlatitude(e.target.value);
+    setupdateObject((prevObject) => ({
+      ...prevObject,
+      latitude: e.target.value,
+    }));
+  };
+
+  const nodeAddressHandler = (e) => {
+    setupdateObject((prevObject) => ({
+      ...prevObject,
+      nodeAddress: e.target.value,
+    }));
   };
 
   return (
@@ -67,7 +67,11 @@ function NIEditModal({ editModalIsOpen, closeEditModal, rowObject }) {
             <div className="ni-edit-modal-content--divider"></div>
             <div className="ni-edit-modal-content-container--container">
               <div className="ni-edit-modal-content--label">노드 번호</div>
-              <div className="ni-edit-modal-content--field--text">13</div>
+              <input
+                className="ni-edit-modal-content--field--input"
+                value={updateObject.nodeAddress}
+                onChange={nodeAddressHandler}
+              />
             </div>
           </div>
         </div>
@@ -78,7 +82,7 @@ function NIEditModal({ editModalIsOpen, closeEditModal, rowObject }) {
               <div className="ni-edit-modal-content--label">노드 명칭</div>{" "}
               <input
                 className="ni-edit-modal-content--field--input"
-                value={location}
+                value={updateObject.location}
                 onChange={locationHandler}
               />
             </div>
@@ -93,13 +97,13 @@ function NIEditModal({ editModalIsOpen, closeEditModal, rowObject }) {
                 <div className="ni-edit-modal-content--label--label">위도</div>
                 <input
                   className="ni-edit-modal-content-location--field--input"
-                  value={longitude}
+                  value={updateObject.longitude}
                   onChange={longitudeHandler}
                 />
                 <div className="ni-edit-modal-content--label--label">경도</div>
                 <input
                   className="ni-edit-modal-content-location--field--input"
-                  value={latitude}
+                  value={updateObject.latitude}
                   onChange={latitudeHandler}
                 />
               </div>
