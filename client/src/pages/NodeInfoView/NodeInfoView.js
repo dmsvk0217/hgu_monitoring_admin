@@ -3,7 +3,7 @@ import "./NodeInfoView.css";
 import NIDataTable from "./NIDataTable/NIDataTable.js";
 import NIEditModal from "./NIEditModal/NIEditModal.js";
 import NIDeleteModal from "./NIDeleteModal/NIDeleteModal.js";
-import { columns, tableData } from "./NITableConfig.js";
+import { columns } from "./NITableConfig.js";
 
 import { fetchNodeInfo } from "../../api/axiosApi.js";
 
@@ -13,11 +13,14 @@ function NodeInfoView() {
   const [isUpdatedNode, setIsUpdatedNode] = useState(false);
   const [isDeletedNode, setIsDeletedNode] = useState(false);
 
-  useEffect(async () => {
+  useEffect(() => {
+    async function fetchData() {
+      setNodeInfo(await fetchNodeInfo());
+    }
     setIsUpdatedNode(false);
     setIsDeletedNode(false);
-    setNodeInfo(await fetchNodeInfo());
-  }, [isUpdatedNode == true || isDeletedNode == true]);
+    fetchData();
+  }, [isUpdatedNode === true || isDeletedNode === true]);
 
   const [editModalIsOpen, setEditModalIsOpen] = useState(false);
   const openEditModal = () => {

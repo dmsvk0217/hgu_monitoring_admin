@@ -1,5 +1,21 @@
 import axiosInstance from "./axiosInstance";
 
+export const fetchRawData = async (date) => {
+  console.log("🚀 ~ fetchRawData ~ date:", date);
+  try {
+    let requestURL = "/api/rawData/day";
+    const response = await axiosInstance.get(requestURL, {
+      params: {
+        //Todo: edit date
+        date: "2024-01-01",
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.log("Error fetching RawData:", error);
+  }
+};
+
 export const fetchNodeInfo = async () => {
   try {
     let requestURL = "/api/nodeinfo";
@@ -14,7 +30,7 @@ export const fetchNodeInfo = async () => {
 export const deleteNodeInfoById = async (id) => {
   try {
     let requestURL = "/api/nodeinfo";
-    const response = await axiosInstance.delete(requestURL, {
+    await axiosInstance.delete(requestURL, {
       params: {
         id: id,
       },

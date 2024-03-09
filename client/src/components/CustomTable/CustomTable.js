@@ -10,6 +10,7 @@ import {
 import "./CustomTable.css";
 
 const CustomTable = ({ data, columns, selectedHourOption }) => {
+  console.log("🚀 ~ CustomTable ~ data:", data);
   const table = useReactTable({
     data,
     columns,
@@ -26,10 +27,7 @@ const CustomTable = ({ data, columns, selectedHourOption }) => {
                 <th key={header.id} style={{ width: header.getSize() }}>
                   {header.isPlaceholder
                     ? null
-                    : flexRender(
-                        header.column.columnDef.header,
-                        header.getContext()
-                      )}
+                    : flexRender(header.column.columnDef.header, header.getContext())}
                 </th>
               ))}
             </tr>
@@ -39,9 +37,7 @@ const CustomTable = ({ data, columns, selectedHourOption }) => {
           {table.getRowModel().rows.map((row) => (
             <tr key={row.id}>
               {row.getVisibleCells().map((cell) => (
-                <td key={cell.id}>
-                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                </td>
+                <td key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</td>
               ))}
             </tr>
           ))}
