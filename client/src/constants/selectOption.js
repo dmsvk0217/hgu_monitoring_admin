@@ -1,16 +1,11 @@
 export const selectUnitOptions = ["일평균", "시간평균"];
 
-export const selectYearOptions = Array.from({ length: 28 }, (_, index) =>
-  String(2024 - index)
-);
+export const selectYearOptions = Array.from({ length: 28 }, (_, index) => String(2024 - index));
 export const selectHourOptions = Array.from({ length: 25 }, (_, index) =>
   index == 0 ? "전체 " : index < 10 ? "0" + index + ":00" : index + ":00"
 );
 
-export const selectMonthOptions = Array.from(
-  { length: 12 },
-  (_, index) => `${index + 1}월`
-);
+export const selectMonthOptions = Array.from({ length: 12 }, (_, index) => `${index + 1}월`);
 
 export const selectSubstanceOptions = [
   "포름알데히드",

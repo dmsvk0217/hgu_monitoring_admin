@@ -5,22 +5,27 @@ import CustomTable from "../../components/CustomTable/CustomTable.js";
 import ExcelDownloadButton from "../../components/DownloadButton/DownloadButton.js";
 import { columns, tableData } from "./RDTableConfig.js";
 import HourOptionButton from "../RawDataView/HourOptionButton/HourOptionButton.js";
+import { getCurrentTimeFilerOption } from "../../util.js";
 
 function RawDataView() {
-  const [selectedHourOption, setSelectedHourOption] = useState("0:00-3:00");
+  const currentTimeFilerOption = getCurrentTimeFilerOption();
+  const { startTime, endTime } = currentTimeFilerOption;
+  const [selectedHourOption, setSelectedHourOption] = useState(`${startTime}-${endTime}`);
 
-  const [caltableData, setcalTableData] = useState(
+  const [filteredtableData, setfilteredTableData] = useState(
     tableData.filter((item) => {
       const timestamp = item.timestamp;
-      return "00" <= timestamp.slice(0, 2) && "03" > timestamp.slice(0, 2);
+      return startTime <= timestamp.slice(0, 4) && endTime > timestamp.slice(0, 4);
     }) || []
   );
 
+  //Todo: data Fetching and props로 넣기
+
   const handleOptionClick = (option) => {
     setSelectedHourOption(option);
-
     const extractedTimes = extractTimes(option);
-    setcalTableData(
+
+    setfilteredTableData(
       tableData.filter((item) => {
         const timestamp = item.timestamp;
         return (
@@ -40,9 +45,9 @@ function RawDataView() {
           selectedHourOption={selectedHourOption}
           handleOptionClick={handleOptionClick}
         />
-        <ExcelDownloadButton data={caltableData ? caltableData : []} />
+        <ExcelDownloadButton data={filteredtableData ? filteredtableData : []} />
         <CustomTable
-          data={caltableData ? caltableData : []}
+          data={filteredtableData ? filteredtableData : []}
           columns={columns}
           selectedHourOption={selectedHourOption}
         />
@@ -54,8 +59,10 @@ function RawDataView() {
 export default RawDataView;
 
 function extractTimes(timeString) {
+  console.log("🚀 ~ extractTimes ~ timeString:", timeString);
   // 정규 표현식을 사용하여 시간 문자열에서 숫자 부분을 추출
   const match = timeString.match(/(\d+):(\d+)-(\d+):(\d+)/);
+  console.log("🚀 ~ extractTimes ~ match:", match);
 
   if (match) {
     // match 배열의 인덱스 1과 3은 시작 시간의 시와 분
