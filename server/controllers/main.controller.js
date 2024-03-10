@@ -34,7 +34,7 @@ exports.getRawDataInDay = async (req, res) => {
 };
 
 exports.getErrDataInDay = async (req, res) => {
-  const { date } = req.body;
+  const { date } = req.query;
   if (!date) return res.status(400).json({ error: "All fields are required" });
   if (!isValidDateFormat(date))
     return res.status(400).send({ error: "date is not valid date format" });
@@ -42,11 +42,7 @@ exports.getErrDataInDay = async (req, res) => {
   const yyyyMM = date.slice(0, 7);
   const dayDD = date.slice(8);
   const query = querys.getErrDataQuery(yyyyMM, dayDD);
-  let dataObject = {
-    type: "getErrDataInDay",
-    date: req.body.date,
-    data: [],
-  };
+  let dataObject = [];
 
   try {
     const errDataDayRef = db.collection(query);
@@ -60,7 +56,7 @@ exports.getErrDataInDay = async (req, res) => {
     snapshot.forEach((doc) => {
       let docData = doc.data();
       docData["id"] = doc.id;
-      dataObject["data"].push(docData);
+      dataObject.push(docData);
     });
   } catch (error) {
     console.log("[getErrDataInDay]", error);

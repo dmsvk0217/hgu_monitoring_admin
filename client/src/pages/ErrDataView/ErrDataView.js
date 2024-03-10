@@ -1,5 +1,6 @@
-import React, { useState } from "react";
-import { columns, tableData } from "./EDTableConfig.js";
+import React, { useState, useEffect } from "react";
+import "./ErrDataView.css";
+import { columns } from "./EDTableConfig.js";
 
 import RDSelection from "./EDSelection/EDSelection.js";
 import ErrDataTable from "./ErrDataTable/ErrDataTable.js";
@@ -7,22 +8,41 @@ import ExcelDownloadButton from "../../components/DownloadButton/DownloadButton.
 import ErrOptionButton from "./ErrOptionButton/ErrOptionButton.js";
 import EDModal from "./EDModal/EDModal.js";
 
-import "./ErrDataView.css";
+import { getCurrentDate } from "../../util.js";
+import { fetchErrorData } from "../../api/axiosApi.js";
 
 function ErrDataView() {
   const [selectedDoneOption, setSelectedDoneOption] = useState("all");
 
-  const [caltableData, setcalTableData] = useState(tableData || []);
+  const [errData, seterrData] = useState([]);
+  const [optionedErrData, setoptionedErrData] = useState([]);
+
+  useEffect(() => {
+    const fetchErrData = async () => {
+      try {
+        const currentDate = getCurrentDate();
+        const fetchedData = await fetchErrorData(currentDate);
+        console.log("🚀 ~ fetchErrData ~ fetchedData:", fetchedData);
+
+        seterrData(fetchedData || []);
+        setoptionedErrData(fetchedData || []);
+      } catch (error) {
+        console.error("데이터를 가져오거나 처리하는 중 오류가 발생했습니다:", error);
+      }
+    };
+
+    fetchErrData();
+  }, []);
 
   const handleOptionClick = (option) => {
     setSelectedDoneOption(option);
     if (option == "all") {
-      setcalTableData(tableData || []);
+      setoptionedErrData(errData || []);
     }
     if (option == "notYet") {
-      setcalTableData(
-        tableData.filter((item) => {
-          return item.done == "no";
+      setoptionedErrData(
+        errData.filter((item) => {
+          return item.done == false;
         }) || []
       );
     }
@@ -47,9 +67,9 @@ function ErrDataView() {
           selectedDoneOption={selectedDoneOption}
           handleOptionClick={handleOptionClick}
         />
-        <ExcelDownloadButton data={caltableData ? caltableData : []} />
+        <ExcelDownloadButton data={optionedErrData ? optionedErrData : []} />
         <ErrDataTable
-          data={caltableData ? caltableData : []}
+          data={optionedErrData ? optionedErrData : []}
           columns={columns}
           selectedDoneOption={selectedDoneOption}
           openModal={openModal}

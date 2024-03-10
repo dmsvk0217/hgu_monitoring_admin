@@ -3,7 +3,8 @@ module.exports = (app) => {
   const mainController = require("../controllers/main.controller");
 
   router.get("/rawData/day", mainController.getRawDataInDay);
-  router.post("/errData/day", mainController.getErrDataInDay);
+
+  router.get("/errData/day", mainController.getErrDataInDay);
   router.put("/errData", mainController.updateErrDataById);
 
   router.get("/nodeInfo", mainController.getNodeInfo);

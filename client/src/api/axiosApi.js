@@ -16,6 +16,22 @@ export const fetchRawData = async (date) => {
   }
 };
 
+export const fetchErrorData = async (date) => {
+  console.log("🚀 ~ fetchErrorData ~ date:", date);
+  try {
+    let requestURL = "/api/errData/day";
+    const response = await axiosInstance.get(requestURL, {
+      params: {
+        //Todo: edit date
+        date: "2024-02-06",
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.log("Error fetching RawData:", error);
+  }
+};
+
 export const fetchNodeInfo = async () => {
   try {
     let requestURL = "/api/nodeinfo";

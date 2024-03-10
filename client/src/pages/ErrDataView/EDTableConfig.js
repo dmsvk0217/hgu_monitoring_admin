@@ -13,8 +13,9 @@ export const columns = [
   columnHelper.accessor("timestamp", { header: "측정시각", size: 10 }),
   columnHelper.accessor("nodeAddress", { header: "노드번호", size: 30 }),
   columnHelper.accessor("location", { header: "노드위치", size: 30 }),
-  columnHelper.accessor("errerType", { header: "에러타입", size: 100 }),
-  columnHelper.accessor("errerCause", { header: "에러원인", size: 100 }),
+  columnHelper.accessor("loraContent", { header: "로라 컨텐츠", size: 100 }),
+  columnHelper.accessor("errMsg", { header: "에러 메세지", size: 100 }),
+  columnHelper.accessor("errCause", { header: "에러원인", size: 100 }),
   columnHelper.accessor("solution", { header: "해결방안", size: 100 }),
   columnHelper.accessor("done", { header: "처리여부", size: 30 }),
   columnHelper.accessor("editButton", {

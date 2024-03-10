@@ -1,11 +1,6 @@
 // CustomTable.js
-import React, { useState } from "react";
-import {
-  createColumnHelper,
-  flexRender,
-  getCoreRowModel,
-  useReactTable,
-} from "@tanstack/react-table";
+import React from "react";
+import { flexRender, getCoreRowModel, useReactTable } from "@tanstack/react-table";
 import { BiSolidEdit } from "react-icons/bi";
 import "./ErrDataTable.css";
 
@@ -46,12 +41,15 @@ const CustomTable = ({ data, columns, openModal, setRowObject }) => {
               {row.getVisibleCells().map((cell) => (
                 <td key={cell.id}>
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                  {/* edit button icon 설정 */}
                   {cell.id.includes("edit") ? (
                     <BiSolidEdit
                       className="err-edit-button"
                       onClick={() => handleEdit(row, cell)}
                     />
                   ) : null}
+                  {/* 순번 설정 */}
+                  {cell.id.includes("sequence") ? parseInt(cell.id[0]) + 1 : null}
                 </td>
               ))}
             </tr>
