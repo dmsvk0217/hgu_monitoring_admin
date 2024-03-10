@@ -8,6 +8,8 @@ import ExcelDownloadButton from "../../components/DownloadButton/DownloadButton.
 import ErrOptionButton from "./ErrOptionButton/ErrOptionButton.js";
 import EDModal from "./EDModal/EDModal.js";
 
+import { selectLocationOptions, selectHourOptions } from "../../constants/selectOption";
+
 import { getCurrentDate } from "../../util.js";
 import { fetchErrorData } from "../../api/axiosApi.js";
 
@@ -57,12 +59,23 @@ function ErrDataView() {
   };
   const [rowObject, setRowObject] = useState({});
 
+  const [selectedDate, setSelectedDate] = useState(new Date());
+  const [selectedHour, setSelectedHour] = useState(selectHourOptions[0]);
+  const [selectedLocation, setSelectedLocation] = useState(selectLocationOptions[0]);
+
   return (
     <div className="ED-container">
       <p className="ED-title">에러 데이터 보기</p>
       <div className="ED-content-container">
         <EDModal modalIsOpen={modalIsOpen} closeModal={closeModal} rowObject={rowObject} />
-        <RDSelection />
+        <RDSelection
+          selectedDate={selectedDate}
+          setSelectedDate={setSelectedDate}
+          selectedHour={selectedHour}
+          setSelectedHour={setSelectedHour}
+          selectedLocation={selectedLocation}
+          setSelectedLocation={setSelectedLocation}
+        />
         <ErrOptionButton
           selectedDoneOption={selectedDoneOption}
           handleOptionClick={handleOptionClick}

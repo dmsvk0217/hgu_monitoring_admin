@@ -7,18 +7,16 @@ import "./EDSelection.css";
 import { FaCalendarAlt } from "react-icons/fa";
 import CustomDropDown from "../../../components/CustomDropDown/CustomDropDown";
 
-import {
-  selectLocationOptions,
-  selectHourOptions,
-} from "../../../constants/selectOption";
+import { selectLocationOptions, selectHourOptions } from "../../../constants/selectOption";
 
-function EDSelection() {
-  const [selectedDate, setSelectedDate] = useState(new Date());
-  const [selectedHour, setSelectedHour] = useState(selectHourOptions[0]);
-  const [selectedLocation, setSelectedLocation] = useState(
-    selectLocationOptions[0]
-  );
-
+function EDSelection({
+  setSelectedDate,
+  setSelectedHour,
+  setSelectedLocation,
+  selectedDate,
+  selectedHour,
+  selectedLocation,
+}) {
   const handleNodeSelect = (node) => {
     setSelectedLocation(node);
   };
@@ -32,17 +30,16 @@ function EDSelection() {
   };
 
   const CustomDatePickerIcon = React.forwardRef(({ onClick }, ref) => (
-    <button
-      onClick={onClick}
-      ref={ref}
-      style={{ background: "none", border: "none" }}
-    >
+    <button onClick={onClick} ref={ref} style={{ background: "none", border: "none" }}>
       <FaCalendarAlt style={{ color: "rgba(85,183,107)", fontSize: "1.2em" }} />
     </button>
   ));
 
-  const handleSearchButton = () => {};
-
+  const handleSearchButton = () => {
+    console.log("🚀 ~ handleSearchButton ~ selectedLocation:", selectedLocation);
+    console.log("🚀 ~ handleSearchButton ~ selectedHour:", selectedHour);
+    console.log("🚀 ~ handleSearchButton ~ selectedDate:", selectedDate);
+  };
   return (
     <div className="EDTable">
       <div className="ED-table-select-container">
